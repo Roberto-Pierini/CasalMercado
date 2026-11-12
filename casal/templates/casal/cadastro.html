@@ -7,6 +7,15 @@
 </head>
 <body>
     <h1>Criar Conta</h1>
+    
+    {% if erro %}
+    <p style="color: red;">{{ erro }}</p>
+    {% endif %}
+
+    {% if sucesso %}
+    <p style="color: rgb(77, 235, 63);">{{ sucesso }}</p>
+    {% endif %}
+
     <form method = "POST">
         {% csrf_token %}
         <br>
