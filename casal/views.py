@@ -28,7 +28,7 @@ def logar(request):
             login(request, user)
             return redirect('/casal/home/')
         else:
-            return render(request, '/casal/login.html', {'erro': 'Usuário ou Senha inválido'})
+            return render(request, 'casal/login.html', {'erro': 'Usuário ou Senha inválido'})
     return render(request, 'casal/login.html')
 
 
