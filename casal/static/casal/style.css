@@ -1,9 +1,22 @@
 body{
-    background: #1f8209;
-    background: linear-gradient(90deg, rgba(31, 130, 9, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(237, 221, 83, 1) 92%);
+    margin: 0;
+    padding: 0;
+    background-image: url('login.png');
+    background-size: cover;
+    height: 100vh;
 }
 
-form {
-    margin: 0 auto;
-    text-align: center;
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card{
+    background-color: rgb(255, 248, 248);
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }

@@ -7,26 +7,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="{% static 'casal/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <h1>Entre na sua Conta</h1>
-    
-    {% if erro %}
-    <p style="color: red;">{{ erro }}</p>
-    {% endif %}
+    <div class="container">
+        <div class="erro">
+        {% if erro %}
+        <p style="color: red;">{{ erro }}</p>
+        {% endif %}
+        </div>
 
-    <form method = "POST">
-        {% csrf_token %}
-        <br>
-        <label>Usuário: </label>
-        <input type="text" name="username" required>
-        <br>
-        <label> Senha: </label>
-        <input type="password" name="password" required>
-        <br>
-        <br>
-        <button type="submit">Logar</button>
-    </form>
-    <p>Não tem conta? <a href ="/casal/cadastro/">Cadastre se</a></p>
+        <div class="login-card">
+            <h2>Entre na sua Conta</h2>
+        
+        
+
+            <form method = "POST">
+                {% csrf_token %}
+                <div class="input-box">
+                    <br>
+                    <i class="fa-solid fa-user"></i></span>
+                    <input type="text" name="username" placeholder="Usuário" required>
+                    <br>
+                </div>
+                    
+                <div class="input-box">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" name="password" placeholder="Senha" required>
+                    <br>
+                </div>
+
+                    
+                <button class="btn" type="submit">Logar</button>
+                    
+                    
+            </form>
+
+            <p class="link-criarconta">Não tem conta? <a href ="/casal/cadastro/">Cadastre se</a></p>
+        </div>
+    </div>
 </body>
 </html>
