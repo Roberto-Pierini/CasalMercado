@@ -1,37 +1,161 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastre-se</title>
+    <title>Casal Mercado • Criar Conta</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 (Stable CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- App Styles -->
+    <link rel="stylesheet" href="{% static 'casal/style.css' %}">
 </head>
 <body>
-    <h1>Criar Conta</h1>
-    
-    {% if erro %}
-    <p style="color: red;">{{ erro }}</p>
-    {% endif %}
+    <div class="login-wrapper">
+        <main class="login-card">
+            <!-- Brand & Header -->
+            <header class="brand-header">
+                <div class="brand-icon-wrapper" aria-hidden="true">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="heart-badge"><i class="fa-solid fa-heart"></i></span>
+                </div>
+                
+                <h1 class="brand-name">Criar Conta no <span>Casal Mercado</span></h1>
+                <p class="brand-subtitle">Comecem hoje a organizar as compras a dois</p>
+                
+                <div class="couple-pill">
+                    <i class="fa-solid fa-sparkles"></i>
+                    <span>Tudo pronto em menos de 1 minuto</span>
+                </div>
+            </header>
 
-    {% if sucesso %}
-    <p style="color: rgb(77, 235, 63);">{{ sucesso }}</p>
-    {% endif %}
+            <!-- Notifications -->
+            {% if erro %}
+            <div class="alert-error" role="alert" aria-live="assertive">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>{{ erro }}</span>
+            </div>
+            {% endif %}
 
-    <form method = "POST">
-        {% csrf_token %}
-        <br>
-        <label>Usuário: </label>
-        <input type="text" name="username" required>
-        <br>
-        <label> Email: </label>
-        <input type="email" name="email" required>
-        <br>
-        <label> Senha: </label>
-        <input type="password" name="password" required>
-        <br>
-        <br>
-        <button type="submit">Cadastrar</button>
-    </form>
+            {% if sucesso %}
+            <div class="alert-success" role="status">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>{{ sucesso }}</span>
+            </div>
+            {% endif %}
 
-    <p>Já tem conta? <a href ="/casal/login">Entre na sua conta</a></p>
+            <!-- Form -->
+            <form method="POST" class="login-form">
+                {% csrf_token %}
+                
+                <div class="input-group">
+                    <label for="username" class="input-label">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Nome de Usuário</span>
+                    </label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            placeholder="Como quer ser chamado(a)?" 
+                            required 
+                            autofocus
+                        >
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="email" class="input-label">
+                        <i class="fa-regular fa-envelope"></i>
+                        <span>E-mail do Casal</span>
+                    </label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-envelope input-icon"></i>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="seuemail@exemplo.com" 
+                            required
+                        >
+                    </div>
+                </div>
+                    
+                <div class="input-group">
+                    <label for="password" class="input-label">
+                        <i class="fa-regular fa-lock"></i>
+                        <span>Senha</span>
+                    </label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Crie uma senha segura" 
+                            required
+                        >
+                        <button 
+                            type="button" 
+                            class="btn-toggle-password" 
+                            id="togglePassword" 
+                            aria-label="Mostrar ou ocultar senha"
+                            tabindex="-1"
+                        >
+                            <i class="fa-regular fa-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button class="btn-submit" type="submit">
+                    <span>Criar Espaço do Casal</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <footer class="card-footer">
+                <p class="link-criarconta">
+                    Já tem conta? 
+                    <a href="/casal/login/">Entre na sua conta</a>
+                </p>
+            </footer>
+        </main>
+
+        <p class="love-note">
+            <span>Planejado com</span> <i class="fa-solid fa-heart"></i> <span>para facilitar a rotina a dois</span>
+        </p>
+    </div>
+
+    <!-- Toggle Password Script -->
+    <script>
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (togglePasswordBtn && passwordInput && toggleIcon) {
+            togglePasswordBtn.addEventListener('click', function () {
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                
+                if (isPassword) {
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            });
+        }
+    </script>
 </body>
 </html>

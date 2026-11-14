@@ -1,50 +1,153 @@
 {% load static %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Casal Mercado • Login</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome 6 (Stable CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <!-- App Styles -->
     <link rel="stylesheet" href="{% static 'casal/style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 </head>
 <body>
-    <div class="container">
-        <div class="erro">
-        {% if erro %}
-        <p style="color: red;">{{ erro }}</p>
-        {% endif %}
-        </div>
+    <div class="login-wrapper">
+        <main class="login-card">
+            <!-- Brand & Welcome Header -->
+            <header class="brand-header">
+                <div class="brand-icon-wrapper" aria-hidden="true">
+                    <i class="fa-solid fa-basket-shopping"></i>
+                    <span class="heart-badge"><i class="fa-solid fa-heart"></i></span>
+                </div>
+                
+                <h1 class="brand-name">Casal <span>Mercado</span></h1>
+                <p class="brand-subtitle">Mais tempo juntos, menos estresse nas compras</p>
+                
+                <div class="couple-pill">
+                    <i class="fa-solid fa-sparkles"></i>
+                    <span>Gestão do lar sincronizada a dois</span>
+                </div>
+            </header>
 
-        <div class="login-card">
-            <h2>Entre na sua Conta</h2>
-        
-        
+            <!-- Error Notification -->
+            {% if erro %}
+            <div class="alert-error" role="alert" aria-live="assertive">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <span>{{ erro }}</span>
+            </div>
+            {% endif %}
 
-            <form method = "POST">
+            <!-- Login Form -->
+            <form method="POST" class="login-form" autocomplete="on">
                 {% csrf_token %}
-                <div class="input-box">
-                    <br>
-                    <i class="fa-solid fa-user"></i></span>
-                    <input type="text" name="username" placeholder="Usuário" required>
-                    <br>
+                
+                <div class="input-group">
+                    <label for="username" class="input-label">
+                        <i class="fa-regular fa-user"></i>
+                        <span>Usuário ou Apelido</span>
+                    </label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-user input-icon"></i>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            placeholder="Ex: roberto, nicole..." 
+                            required 
+                            autofocus
+                            autocomplete="username"
+                        >
+                    </div>
                 </div>
                     
-                <div class="input-box">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="password" name="password" placeholder="Senha" required>
-                    <br>
+                <div class="input-group">
+                    <label for="password" class="input-label">
+                        <i class="fa-regular fa-lock"></i>
+                        <span>Senha de Acesso</span>
+                    </label>
+                    <div class="input-box">
+                        <i class="fa-solid fa-lock input-icon"></i>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Sua senha secreta" 
+                            required
+                            autocomplete="current-password"
+                        >
+                        <button 
+                            type="button" 
+                            class="btn-toggle-password" 
+                            id="togglePassword" 
+                            aria-label="Mostrar ou ocultar senha"
+                            tabindex="-1"
+                        >
+                            <i class="fa-regular fa-eye" id="toggleIcon"></i>
+                        </button>
+                    </div>
                 </div>
 
-                    
-                <button class="btn" type="submit">Logar</button>
-                    
-                    
+                <button class="btn-submit" type="submit">
+                    <span>Acessar Lista do Lar</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
             </form>
 
-            <p class="link-criarconta">Não tem conta? <a href ="/casal/cadastro/">Cadastre se</a></p>
-        </div>
+            <!-- Quick Couple Highlights -->
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="fa-solid fa-bolt"></i>
+                    <span>Rápido & Direto</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Tudo em Tempo Real</span>
+                </div>
+            </div>
+
+            <!-- Footer / Registration link -->
+            <footer class="card-footer">
+                <p class="link-criarconta">
+                    Ainda não têm conta? 
+                    <a href="/casal/cadastro/">Criar espaço do casal</a>
+                </p>
+            </footer>
+        </main>
+
+        <!-- Supportive Microcopy -->
+        <p class="love-note">
+            <span>Planejado com</span> <i class="fa-solid fa-heart"></i> <span>para facilitar a rotina a dois</span>
+        </p>
     </div>
+
+    <!-- Interactive script for password reveal -->
+    <script>
+        const togglePasswordBtn = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (togglePasswordBtn && passwordInput && toggleIcon) {
+            togglePasswordBtn.addEventListener('click', function () {
+                const isPassword = passwordInput.getAttribute('type') === 'password';
+                passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+                
+                // Toggle icon
+                if (isPassword) {
+                    toggleIcon.classList.remove('fa-eye');
+                    toggleIcon.classList.add('fa-eye-slash');
+                } else {
+                    toggleIcon.classList.remove('fa-eye-slash');
+                    toggleIcon.classList.add('fa-eye');
+                }
+            });
+        }
+    </script>
 </body>
 </html>
