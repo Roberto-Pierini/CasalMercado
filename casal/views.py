@@ -11,9 +11,14 @@ def cadastro(request):
         username = request.POST.get('username')
         email = request.POST.get('email')
         password = request.POST.get('password')
-        if not User.objects.filter(username = username).exists():
+        
+        if not User.objects.filter(username__iexact = username).exists() and not User.objects.filter(email__iexact = email).exists():
             User.objects.create_user(username=username, email=email, password=password)
             return render(request, 'casal/cadastro.html',{'sucesso': 'Usuário cadastrado!'} )
+        
+        elif User.objects.filter(email__iexact = email).exists():
+             return render(request, 'casal/cadastro.html', {'erro': 'Este nome de e-mail já está em uso.'})
+            
         else:
              return render(request, 'casal/cadastro.html', {'erro': 'Este nome de usuário já está em uso.'})
     
